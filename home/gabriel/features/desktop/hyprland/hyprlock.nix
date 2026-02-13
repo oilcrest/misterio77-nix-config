@@ -20,11 +20,13 @@
       background = {
         path = "screenshot";
         blur_passes = 4;
+        brightness = if config.colorscheme.mode == "light" then 1.1 else 0.8;
       };
       input-field = lib.forEach config.monitors (monitor: {
         monitor = monitor.name;
-        dots_size = toString (0.15 * monitor.scale);
-
+        size = "800, 90";
+        dots_size = toString (0.25 * monitor.scale);
+        placeholder_text = "";
         font_color = "rgb(${lib.removePrefix "#" config.colorscheme.colors.on_surface})";
         font_family = config.fontProfiles.regular.name;
         position = "0, -20%";
@@ -48,7 +50,7 @@
         {
           monitor = monitor.name;
           text = "$FAIL";
-          font_color = "rgb(${lib.removePrefix "#" config.colorscheme.colors.on_surface})";
+          color = "rgb(${lib.removePrefix "#" config.colorscheme.colors.on_surface})";
           font_family = config.fontProfiles.regular.name;
           font_size = toString (builtins.floor (18 * monitor.scale));
           position = "0, -40%";
